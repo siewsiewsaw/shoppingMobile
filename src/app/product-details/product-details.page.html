@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar color="secondary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref=""></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{selectedProduct.title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-img [src]="selectedProduct.imageUrl"></ion-img>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="my-label" *ngFor="let productdetail of selectedProduct.ProductDetails">
+          {{productdetail}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>

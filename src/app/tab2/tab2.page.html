@@ -1,9 +1,40 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab Two
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Product Page</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openCart()">
+        <ion-badge *ngIf="cart.length > 0">{{ cart.length }}</ion-badge>
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <div class="ion-padding">
+    <ion-list>
+      <ion-item *ngFor="let product of products;let i = index" class="label-text">
+        <ion-col class='fixed-col'>
+          <ion-row>
+            <ion-thumbnail class="ion-margin-end">
+              <img [src]="product.imageUrl" (click)="onNavigateToProduct(product.id)">
+            </ion-thumbnail>
+          </ion-row>
+          <ion-row>
+            <ion-label class="ion-text-wrap">{{product.title}}</ion-label>
+          </ion-row>
+        </ion-col>
+          <ion-icon name="remove-circle" (click)="decrementQty(i)" item-right></ion-icon>
+          <ion-input type="number" min="0" [(ngModel)]="product.qty"></ion-input>
+          <ion-icon name="add-circle" (click)="incrementQty(i)" item-right></ion-icon>
+
+          <ion-label>${{product.qty*product.price}}</ion-label>
+          <ion-button (click)="addToCart(product)">Add</ion-button>
+      </ion-item>
+
+    </ion-list>
+  </div>
+</ion-content>

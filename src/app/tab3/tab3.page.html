@@ -1,9 +1,27 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" routerLink="/tabs/tab2"></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      Tab Three
+      Shopping Cart
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of selectedItems" lines="inset">
+      {{ item.title }} - Qty: {{ item.count }} - {{ item.price | currency:'USD':'symbol' }}
+      <ion-label slot="end" text-right>{{ (item.price * item.count) | currency:'USD':'symbol' }}</ion-label>
+      <ion-buttons slot="end">
+        <ion-icon name="trash" (click)="onClickTrash()"></ion-icon>
+      </ion-buttons>
+    </ion-item>
+    <ion-item>
+      Total: <span slot="end">{{ total | currency:'USD':'symbol' }}</span>
+      
+    </ion-item>
+    <ion-button (click)="confirm(total)">confirm</ion-button>
+  </ion-list>
+</ion-content>
